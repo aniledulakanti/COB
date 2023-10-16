@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter</title>
+    <link rel="icon" type="favicon" href="icons8-conversion-50.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div  class="converter" >
+        <input id="input" type="number" placeholder="Enter value">
+        <select id="from">
+            <option value="mm">Millimeter</option>
+            <option value="cm">Centimeter</option>
+            <option value="m">Meter</option>
+            <option value="km">Kilometer</option>
+        </select>
+        <button onclick="convert()">Convert</button>
+        <select id="to">
+            <option value="mm">Millimeter</option>
+            <option value="cm">Centimeter</option>
+            <option value="m">Meter</option>
+            <option value="km">Kilometer</option>
+        </select>
+        <input id="output" type="number" readonly>
+    </div> <script>
+        function convert() {
+            const input = parseFloat(document.getElementById('input').value);
+            const fromUnit = document.getElementById('from').value;
+            const toUnit = document.getElementById('to').value;
+            let convertedValue;
+
+            // Conversion factors for various units
+            const conversionFactors = {
+                mm: 0.001,  // Millimeter to Meter
+                cm: 0.01,   // Centimeter to Meter
+                m: 1,       // Meter to Meter (no conversion needed)
+                km: 1000    // Kilometer to Meter
+            };
+
+            // Perform the conversion
+            if (fromUnit in conversionFactors && toUnit in conversionFactors) {
+                convertedValue = input * (conversionFactors[toUnit] / conversionFactors[fromUnit]);
+            } else {
+                // Handle unsupported conversions or show an error message
+                convertedValue = "Conversion not supported";
+            }
+
+            document.getElementById('output').value = convertedValue;
+        }
+    </script>
+
+   
+</body>
+</html>
